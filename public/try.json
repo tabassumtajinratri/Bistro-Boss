@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Creamy Alfredo Pasta",
+    "ingredients": ["Penne Pasta, ", "Cream Sauce, ", "Parmesan Cheese, ", "Garlic, ", "Butter"],
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFP7YpEQQNtla-G5yTv3Zt7QdD1OiOrp9hBQ&s",
+    "button": "Add to Cart",
+    "price": 8.99,
+    "category": "Pasta"
+  },
+  {
+    "id": 2,
+    "name": "Spaghetti Bolognese",
+    "ingredients": ["Spaghetti,", " Ground Beef,", " Tomato Sauce,", " Onions,", " Herbs"],
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6aPYfEYoKcErYzedyJyLRqvC9FLuUlp1how&s",
+    "button": "Add to Cart",
+    "price": 9.99,
+    "category": "Pasta"
+  },
+  {
+    "id": 3,
+    "name": "Classic Tomato Soup",
+    "ingredients": ["Tomatoes,", " Onion,", " Garlic,", " Olive Oil,", " Basil"],
+    "image": "https://cdn.jwplayer.com/v2/media/3ov9wWAu/thumbnails/RLBTMiP0.jpg?width=1280",
+    "button": "Add to Cart",
+    "price": 4.99,
+    "category": "Soup"
+  }
+
+]
