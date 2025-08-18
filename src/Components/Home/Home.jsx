@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Banner from "../Banner/Banner";
 import Call_Us from "../Call_Us/Call_Us";
 import Card from "../Card/Card";
@@ -11,6 +12,9 @@ import Try from "../Try/Try";
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                 <title>Home</title>
+            </Helmet>
             <Banner></Banner>
             <Catagory></Catagory>
             <Card></Card>
