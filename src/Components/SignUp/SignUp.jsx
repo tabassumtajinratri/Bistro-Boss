@@ -1,15 +1,37 @@
 
+import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
     const {register, handleSubmit, formState: { errors }} = useForm()
+    const {createUser, updateUserProfile}= useContext(AuthContext)
+    const navigate = useNavigate()
     
+  const onSubmit = (data) => {
+  console.log(data);
 
-    const onSubmit = data => {
-        console.log(data)
-    }
+  createUser(data.email, data.password)
+    .then(result => {
+      const loggedUser = result.user;
+      console.log("User created:", loggedUser);
+
+      // Update profile
+      return updateUserProfile(data.name, data.photoUrl);
+    })
+    .then(() => {
+      console.log("User profile updated successfully");
+
+      navigate('/')
+    })
+
+    .catch(error => {
+      console.error("Error during sign up:", error.message);
+    });
+};
 
     return (
   <>
@@ -32,6 +54,13 @@ const SignUp = () => {
         <label className="label">Name</label>
           <input type="text" {...register("name", { required: true })} name='name' className="input" placeholder="Name" />
            {errors.name && <span>This field is required</span>}
+
+           <label className="label">Photo URL</label>
+          <input type="text" {...register("photoUrl", { required: true })}  className="input" placeholder="photo URL" />
+           {errors.photoUrl && <span>This field is required</span>}
+
+
+
           <label className="label">Email</label>
           <input type="email" {...register("email",  { required: true })}  name='email' 
           className="input" placeholder="Email" />
