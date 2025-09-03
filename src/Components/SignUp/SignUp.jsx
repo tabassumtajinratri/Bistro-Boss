@@ -4,9 +4,12 @@ import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecurePublic from "../Hooks/useAxiosSecurePublic";
+import SocialLogIn from "../SocialLogIn/SocialLogIn";
 
 const SignUp = () => {
 
+    const axiosPublic = useAxiosSecurePublic()
     const {register, handleSubmit, formState: { errors }} = useForm()
     const {createUser, updateUserProfile}= useContext(AuthContext)
     const navigate = useNavigate()
@@ -23,9 +26,22 @@ const SignUp = () => {
       return updateUserProfile(data.name, data.photoUrl);
     })
     .then(() => {
-      console.log("User profile updated successfully");
+      const userInfo ={
+        name:data.name,
+        email: data.email
 
-      navigate('/')
+
+      }
+      axiosPublic.post('/users',userInfo)
+      .then(res=>{
+        if(res.data.insertedId){
+           console.log("User profile updated successfully");
+
+        navigate('/')
+
+        }
+      })
+     
     })
 
     .catch(error => {
@@ -85,7 +101,12 @@ const SignUp = () => {
               />
         </fieldset>
       </div>
+        <div className="divider divider-start"></div>
+     <div className="m-3 p-4">
+       <SocialLogIn></SocialLogIn>
+     </div>
     </form>
+    
   </div>
 </div>
 </>
