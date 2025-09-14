@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaCartShopping, FaVoicemail } from "react-icons/fa6";
+import { FaCartShopping} from "react-icons/fa6";
 import { FaHome } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { MdRateReview } from "react-icons/md";
@@ -7,10 +7,11 @@ import { TbBrandBooking } from "react-icons/tb";
 import { FaSearch } from "react-icons/fa";
 import useCarts from "../Hooks/useCarts";
 import { IoIosContact } from "react-icons/io";
+import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
     const [cart]=useCarts()
 
-    const isAdmin = true
+    const [isAdmin] = useAdmin();
 
 
     return (
