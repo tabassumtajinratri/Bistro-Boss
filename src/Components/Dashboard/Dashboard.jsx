@@ -15,8 +15,8 @@ const Dashboard = () => {
 
 
     return (
-        <div className="flex">
-            <div className="w-64 min-h-screen bg-amber-400">
+        <div className="flex justify-around">
+            <div className="min-h-screen w-64 bg-amber-400">
                 <ul className="menu p-4">
                      {
                         isAdmin ? <>
@@ -27,7 +27,7 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/addItems'>  <SlCalender />AddItems</NavLink>   
                     </li>
                     <li>
-                        <NavLink to='/dashboard/manageitems'> <FaCartShopping/>ManageItems</NavLink>   
+                        <NavLink to='/dashboard/manageItems'> <FaCartShopping/>ManageItems</NavLink>   
                     </li>
 
                        <li>
