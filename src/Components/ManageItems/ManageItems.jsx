@@ -4,6 +4,7 @@ import useMenu from "../Hooks/useMenu";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menu, loading, refetch] = useMenu();
@@ -75,7 +76,7 @@ const ManageItems = () => {
                 <td>{item.name}</td>
                 <td>${item.price}</td>
                 <td>
-                  <button><FaEdit/></button>
+                <Link to={`/dashboard/updateItem/${item._id}`}><button><FaEdit/></button></Link>
                 </td>
                 <td>
                   <button onClick={()=> handleDeleteItems(item)}>  <FaRegTrashAlt/>  </button>
