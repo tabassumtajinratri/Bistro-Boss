@@ -25,7 +25,7 @@ const UpdateItem = () => {
     })
     if(res.data.success){
       const menuItem ={
-        name:data.recipeName,
+        recipeName:data.recipeName,
         category: data.category,
         price: parseFloat(data.price),
         recipe: data.recipe,
@@ -34,7 +34,7 @@ const UpdateItem = () => {
 
       const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem)
       console.log(menuRes.data)
-      if(menuRes.data.insertedId){
+      if(menuRes.data.modifiedCount > 0){
       Swal.fire({
   position: "top-end",
   icon: "success",
