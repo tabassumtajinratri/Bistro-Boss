@@ -75,6 +75,24 @@ const CheckOutFrom = () => {
       if(paymentIntent.status === 'succeeded'){
         console.log('tranaction id', paymentIntent.id)
         settranactionId(paymentIntent.id)
+
+        const payment = {
+          email: user.email,
+          price: totalPrice,
+          tranactionId: paymentIntent.id,
+          date: new Date(), //utc time
+          cartIds: cart.map(item => item._id),
+          menuItemIds: cart.map(item =>item.menuId),
+          status: 'send pending'
+
+        }
+
+        const res = await axiosSecure.post('/payments', payment)
+        console.log('payment saved', res.data)
+        
+
+
+
       }
     }
 
