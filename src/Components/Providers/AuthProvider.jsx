@@ -56,6 +56,7 @@ const updateUserProfile = (name, photo)=>{
                    if( res.data.token)
                    {
                     localStorage.setItem('access-token', res.data.token)
+                      setLoading(false)
                    }
 
                    
@@ -64,10 +65,11 @@ const updateUserProfile = (name, photo)=>{
             }
             else{
                 localStorage.removeItem('access-token')
+                  setLoading(false)
             }
 
             console.log('current User', currentUser)
-            setLoading(false)
+          
 
         })
         return ()=>{
