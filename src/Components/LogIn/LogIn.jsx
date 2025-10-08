@@ -131,7 +131,7 @@ const LogIn = () => {
 
               <div>
                 <p>
-                  <small>
+                  <small className="font-bold">
                     New Here? <Link to="/signUp">Create an account</Link>
                   </small>
                   <SocialLogIn></SocialLogIn>

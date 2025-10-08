@@ -13,11 +13,11 @@ const Card = () => {
   <div className="hero-overlay"></div>
   <div className="hero-content text-neutral-content text-center">
     <div className=" bg-white max-w-lvh">
-      <h1 className="mb-5 text-5xl font-bold mt-12 text-black">Bristo Boss</h1>
+      <h1 className="mb-5 text-5xl text-red-950 font-bold mt-12 text-black">Bristo Boss</h1>
       <p className="mb-5 text-justify text-black p-10">
         Welcome to Bristo Boss, where flavor meets comfort. Every dish is made with love using fresh ingredients to ensure the perfect taste. Enjoy a cozy, relaxing vibe as you sip freshly brewed coffee or taste our signature.
 
-        <p className='text-center'>it’s a place to create memories, enjoy comfort, and celebrate life.</p>
+        <p className='text-center m-2 font-bold italic text-red-950'>It’s a place to create memories, enjoy comfort, and celebrate life.</p>
        
       </p>
      

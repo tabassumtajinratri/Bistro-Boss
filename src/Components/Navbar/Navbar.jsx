@@ -19,21 +19,21 @@ const Navbar = () => {
   }
 
   const navOptions =<>
-  <Link className='p-4' to='/'>Home</Link>
-  <Link className='p-4' to='/menu'>Menu</Link>
-  <Link className='p-4' to='/order/salad'>Order</Link>
+  <Link className='p-4 text-white' to='/'>Home</Link>
+  <Link className='p-4 text-white' to='/menu'>Menu</Link>
+  <Link className='p-4 text-white' to='/order/salad'>Order</Link>
  {
 
-  user && isAdmin && <li> <Link className='p-4' to='/dashboard/adminHome'>Dashboard</Link> </li>
+  user && isAdmin && <li> <Link className='p-4 text-white' to='/dashboard/adminHome'>Dashboard</Link> </li>
 
  }
 
   {
 
-  user && !isAdmin && <li> <Link to='/dashboard/adminHome'>Dashboard</Link> </li>
+  user && !isAdmin && <li> <Link className='p-4 text-white' to='/dashboard/adminHome'>Dashboard</Link> </li>
 
  }
-  <Link className='p-4' to='/signUp'>SignUp</Link>
+  <Link className='p-4 text-white' to='/signUp'>SignUp</Link>
   <li>
     <Link to='/dashboard/cart'>
     <button className="btn">
@@ -47,9 +47,9 @@ const Navbar = () => {
   {
     user?<>
     {/* <span className='mt-8'>{user?.displayName}</span> */}
-    <button onClick={handleLogOut} className="p-4 btn btn-ghost">LogOut</button>
+    <button onClick={handleLogOut} className="p-4 btn btn-ghost text-white">LogOut</button>
     </>:
-    <> <Link className='p-4' to='/login'>LogIn</Link></>
+    <> <Link className='p-4 text-white' to='/login'>LogIn</Link></>
   }
  
    </>
@@ -72,8 +72,8 @@ const Navbar = () => {
       </ul>
     </div>
    <div className="flex flex-col">
-  <h1 className="text-3xl mt-2">Bistro Boss</h1>
-  <h1 className="text-xl tracking-[0.5em] mt-1">
+  <h1 className="text-3xl mt-2 text-white">Bistro Boss</h1>
+  <h1 className="text-xl tracking-[0.5em] mt-1 text-white">
     RESTAURANT
   </h1>
 </div>
@@ -83,9 +83,9 @@ const Navbar = () => {
      {navOptions}
     </ul>
   </div>
-  <div className="navbar-end">
-    <a className="btn">Button</a>
-  </div>
+  {/* <div className="navbar-end">
+    <a className="btn">Let's Explore</a>
+  </div> */}
 </div>
         </div>
     );
