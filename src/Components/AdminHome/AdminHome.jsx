@@ -3,55 +3,21 @@ import useAuth from '../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { FaBook, FaDollarSign, FaJediOrder, FaUser } from 'react-icons/fa6';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Legend,
+} from 'recharts';
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
-
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 
 const getPath = (x, y, width, height) => {
   return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}
@@ -60,9 +26,7 @@ const getPath = (x, y, width, height) => {
   Z`;
 };
 
-const TriangleBar = (props) => {
-  const { fill, x, y, width, height } = props;
-
+const TriangleBar = ({ fill, x, y, width, height }) => {
   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
 
@@ -78,27 +42,43 @@ const AdminHome = () => {
     },
   });
 
-
-  const {data: chartData=[]}= useQuery({
+  const { data: chartData = [] } = useQuery({
     queryKey: ['order-stats'],
-    queryFn: async ()=>{
-      const res= await axiosSecure.get('/order-stats');
+    queryFn: async () => {
+      const res = await axiosSecure.get('/order-stats');
       return res.data;
-    }
-  })
-console.log('Order Stats (chartData):', chartData);
+    },
+  });
 
+  console.log('Order Stats (chartData):', chartData);
 
+  const piChartData = chartData.map((data) => ({
+    name: data.category,
+    value: data.revenue,
+  }));
 
   if (!stats) {
     return <p className="text-center text-lg mt-10">Loading admin stats...</p>;
   }
 
-  return (
-    <div className="text-3xl">
-      <h1>Hi, Welcome {user?.displayName ? user.displayName : 'Back'}</h1>
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-      <div className="stats shadow mt-6">
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold">Hi, Welcome {user?.displayName || 'Back'}</h1>
+
+      <div className="stats shadow mt-6 grid grid-cols-4 gap-4">
         <div className="stat">
           <div className="stat-figure text-secondary">
             <FaDollarSign />
@@ -136,33 +116,49 @@ console.log('Order Stats (chartData):', chartData);
         </div>
       </div>
 
-      <div className="flex">
-        <div className='w-1/2'>
+      <div className="flex justify-between">
+        <div className="w-full md:w-1/2">
           <BarChart
-      width={500}
-      height={300}
-      data={chartData}
-      margin={{
-        top: 20,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="category" />
-      <YAxis />
-      <Bar dataKey="quantity" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
-        {chartData.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={colors[index % 6]} />
-          
-        ))}
-      </Bar>
-    </BarChart>
+            width={500}
+            height={300}
+            data={chartData}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="category" />
+            <YAxis />
+            <Bar dataKey="quantity" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+              ))}
+            </Bar>
+          </BarChart>
         </div>
 
-        <div>
-
+        <div className="w-full md:w-1/2">
+          <PieChart width={400} height={400}>
+            <Pie
+              data={piChartData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={120}
+              fill="#8884d8"
+              dataKey="value"
+               minAngle={30}
+            >
+              {piChartData.map((entry, index) => (
+                <Cell key={`cell-${entry.name}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Legend></Legend>
+          </PieChart>
         </div>
       </div>
     </div>
@@ -170,6 +166,3 @@ console.log('Order Stats (chartData):', chartData);
 };
 
 export default AdminHome;
-
-
-

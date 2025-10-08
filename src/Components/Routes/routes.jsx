@@ -20,6 +20,7 @@ import Payment from "../Payment/Payment";
 import PaymentHistory from "../PaymentHistory/PaymentHistory";
 import UserHome from "../UserHome/UserHome";
 import AdminHome from "../AdminHome/AdminHome";
+import Contact from "../Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +50,12 @@ export const router = createBrowserRouter([
          {
             path:'/secret',
             element:<PrivateRoute><Secret></Secret></PrivateRoute>
-        }
+        },
+            {
+        path: '/contact',
+        element: <Contact></Contact>
+      }
+       
     ]
   },
   {
@@ -73,6 +79,8 @@ export const router = createBrowserRouter([
         path: 'paymentHistory',
         element: <PaymentHistory></PaymentHistory>
       },
+    
+
 
       //admin
 

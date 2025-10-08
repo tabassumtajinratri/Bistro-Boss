@@ -30,9 +30,9 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/manageItems'> <FaCartShopping/>ManageItems</NavLink>   
                     </li>
 
-                       <li>
+                       {/* <li>
                         <NavLink to='/dashboard/managebooking'>  <MdRateReview />Manage Bookings</NavLink>   
-                    </li>
+                    </li> */}
 
                        <li>
                         <NavLink to='/dashboard/allUsers'>  <TbBrandBooking />All Users</NavLink>   
@@ -50,13 +50,13 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/cart'> <FaCartShopping/>My Cart ({cart.length})</NavLink>   
                     </li>
 
-                       <li>
+                       {/* <li>
                         <NavLink to='/dashboard/review'>  <MdRateReview />Add Review</NavLink>   
                     </li>
 
                        <li>
                         <NavLink to='/dashboard/paymentHistory'>  <TbBrandBooking />Real History</NavLink>   
-                    </li>
+                    </li> */}
                         </>
                      }
 
